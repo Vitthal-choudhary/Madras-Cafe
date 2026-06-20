@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madras Cafe — Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:        #D4A017;
+      --gold-light:  #F0C84A;
+      --gold-pale:   #FDE9A0;
+      --bg:          #0D0B07;
+      --surface:     #161208;
+      --card:        #1C1507;
+      --border:      #3A2D0A;
+      --text:        #EDE5CC;
+      --muted:       #9A8A6A;
+      --accent-red:  #C0392B;
+      --white:       #FFFFFF;
+      --radius:      12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── HERO BANNER ─────────────────────────────────────── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 52px 20px 40px;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #2A1E04 0%, var(--bg) 70%);
+    }
+
+    /* animated shimmer border */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 6px,
+        rgba(212,160,23,.08) 6px, rgba(212,160,23,.08) 7px
+      );
+      pointer-events: none;
+    }
+
+    .hero-ornament {
+      font-size: 28px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      opacity: .7;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(36px, 9vw, 80px);
+      font-weight: 900;
+      color: var(--gold-light);
+      text-shadow:
+        0 0 24px rgba(240,200,74,.5),
+        0 2px 0 #7A5800,
+        0 4px 12px rgba(0,0,0,.8);
+      letter-spacing: 4px;
+      line-height: 1.1;
+    }
+
+    .hero-tagline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(12px, 2.5vw, 17px);
+      color: var(--gold-pale);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      opacity: .85;
+    }
+
+    .hero-sai {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-top: 14px;
+      opacity: .7;
+    }
+
+    /* gold divider line */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 24px auto;
+      max-width: 500px;
+      padding: 0 20px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .divider-icon { color: var(--gold); font-size: 18px; flex-shrink: 0; }
+
+    /* ─── NAV TABS ────────────────────────────────────────── */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,11,7,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 4px;
+      padding: 10px 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      transition: all .2s;
+    }
+    .nav a:hover {
+      color: var(--gold-light);
+      border-color: var(--border);
+      background: var(--card);
+    }
+
+    /* ─── MAIN CONTENT ────────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    /* section heading */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 40px 0 20px;
+    }
+    .section-head:first-child { margin-top: 0; }
+    .section-head h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 700;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* sub-group label */
+    .group-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 22px 0 8px;
+    }
+
+    /* item grid */
+    .item-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    /* single menu item */
+    .item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color .18s, background .18s;
+    }
+    .item:hover {
+      background: #231A06;
+      border-color: var(--gold);
+    }
+    .item-name {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      flex: 1;
+    }
+    .item-name .spicy {
+      display: inline-block;
+      font-size: 11px;
+      background: var(--accent-red);
+      color: #fff;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      vertical-align: middle;
+    }
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted var(--border);
+      min-width: 20px;
+      margin-bottom: 4px;
+    }
+    .item-price {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold-light);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* two-col layout for wider screens */
+    @media (min-width: 620px) {
+      .item-grid.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    footer span { color: var(--gold); }
+
+    /* ─── SHIMMER ANIMATION ───────────────────────────────── */
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ HERO ════════════════ -->
+<header class="hero">
+  <div class="hero-ornament">✦ ✦ ✦</div>
+  <h1>MADRAS CAFE</h1>
+  <p class="hero-tagline">Enjoy THE REAL Taste of South India</p>
+  <p class="hero-sai">✦ Om Sai Ram ✦</p>
+</header>
+
+<!-- ════════════════ STICKY NAV ════════════════ -->
+<nav class="nav-wrap">
+  <div class="nav">
+    <a href="#dosas">Dosas</a>
+    <a href="#idli">Idli & Vada</a>
+    <a href="#uttapam">Uttapam</a>
+    <a href="#specials">Café Specials</a>
+  </div>
+</nav>
+
+<!-- ════════════════ MENU ════════════════ -->
+<main class="container">
+
+  <!-- ── DOSAS ── -->
+  <div class="section-head" id="dosas">
+    <h2>🫓 Dosas</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <p class="group-label">Classic</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Plain Dosa</span><span class="item-dots"></span><span class="item-price">₹70</span></div>
+    <div class="item"><span class="item-name">Masala Dosa</span><span class="item-dots"></span><span class="item-price">₹100</span></div>
+    <div class="item"><span class="item-name">Butter Masala Dosa</span><span class="item-dots"></span><span class="item-price">₹120</span></div>
+    <div class="item"><span class="item-name">Family Dosa</span><span class="item-dots"></span><span class="item-price">₹180</span></div>
+  </div>
+
+  <p class="group-label">Paneer & Special</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Paneer Dosa</span><span class="item-dots"></span><span class="item-price">₹140</span></div>
+    <div class="item"><span class="item-name">Butter Paneer Dosa</span><span class="item-dots"></span><span class="item-price">₹160</span></div>
+    <div class="item"><span class="item-name">Special Dosa</span><span class="item-dots"></span><span class="item-price">₹140</span></div>
+    <div class="item"><span class="item-name">Butter Spl. Dosa</span><span class="item-dots"></span><span class="item-price">₹160</span></div>
+  </div>
+
+  <p class="group-label">Mysore Style</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Mysore Plain Dosa <span class="spicy">Spicy</span></span><span class="item-dots"></span><span class="item-price">₹120</span></div>
+    <div class="item"><span class="item-name">Mysore Butter Plain</span><span class="item-dots"></span><span class="item-price">₹140</span></div>
+    <div class="item"><span class="item-name">Mysore Masala</span><span class="item-dots"></span><span class="item-price">₹130</span></div>
+    <div class="item"><span class="item-name">Mysore Paneer Dosa</span><span class="item-dots"></span><span class="item-price">₹150</span></div>
+  </div>
+
+  <p class="group-label">Onion Dosas</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Onion Plain Dosa</span><span class="item-dots"></span><span class="item-price">₹120</span></div>
+    <div class="item"><span class="item-name">Onion Butter Plain Dosa</span><span class="item-dots"></span><span class="item-price">₹140</span></div>
+    <div class="item"><span class="item-name">Onion Masala Dosa</span><span class="item-dots"></span><span class="item-price">₹130</span></div>
+    <div class="item"><span class="item-name">Onion Paneer Dosa</span><span class="item-dots"></span><span class="item-price">₹150</span></div>
+  </div>
+
+  <p class="group-label">Rava Dosas</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Rava Plain Dosa</span><span class="item-dots"></span><span class="item-price">₹150</span></div>
+    <div class="item"><span class="item-name">Rava Butter Masala Dosa</span><span class="item-dots"></span><span class="item-price">₹190</span></div>
+    <div class="item"><span class="item-name">Rava Masala Dosa</span><span class="item-dots"></span><span class="item-price">₹160</span></div>
+    <div class="item"><span class="item-name">Rava Paneer Dosa</span><span class="item-dots"></span><span class="item-price">₹180</span></div>
+  </div>
+
+  <!-- ── IDLI & VADA ── -->
+  <div class="divider"><span class="divider-icon">❖</span></div>
+  <div class="section-head" id="idli">
+    <h2>🍚 Idli & Vada</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Sambar Vada</span><span class="item-dots"></span><span class="item-price">₹70</span></div>
+    <div class="item"><span class="item-name">Idli Sambar</span><span class="item-dots"></span><span class="item-price">₹70</span></div>
+    <div class="item"><span class="item-name">Fried Idli</span><span class="item-dots"></span><span class="item-price">₹140</span></div>
+    <div class="item"><span class="item-name">Upma Sambar <span class="spicy" style="background:#7A5800;">Sunday Spl.</span></span><span class="item-dots"></span><span class="item-price">₹100</span></div>
+  </div>
+
+  <!-- ── UTTAPAM ── -->
+  <div class="divider"><span class="divider-icon">❖</span></div>
+  <div class="section-head" id="uttapam">
+    <h2>🥘 Uttapam Dosa</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Plain Uttapam</span><span class="item-dots"></span><span class="item-price">₹100</span></div>
+    <div class="item"><span class="item-name">Onion Uttapam</span><span class="item-dots"></span><span class="item-price">₹130</span></div>
+    <div class="item"><span class="item-name">Onion Tomato Uttapam</span><span class="item-dots"></span><span class="item-price">₹140</span></div>
+    <div class="item"><span class="item-name">Mix Veg. Uttapam</span><span class="item-dots"></span><span class="item-price">₹150</span></div>
+    <div class="item"><span class="item-name">Paneer Uttapam</span><span class="item-dots"></span><span class="item-price">₹160</span></div>
+  </div>
+
+  <!-- ── CAFÉ SPECIALS ── -->
+  <div class="divider"><span class="divider-icon">❖</span></div>
+  <div class="section-head" id="specials">
+    <h2>⭐ Madras Café Special</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="item-grid">
+    <div class="item"><span class="item-name">Pav Bhaji</span><span class="item-dots"></span><span class="item-price">₹100</span></div>
+    <div class="item"><span class="item-name">Spring Roll</span><span class="item-dots"></span><span class="item-price">₹100</span></div>
+    <div class="item"><span class="item-name">Manchurian</span><span class="item-dots"></span><span class="item-price">₹120 / ₹160</span></div>
+    <div class="item"><span class="item-name">French Fries</span><span class="item-dots"></span><span class="item-price">₹100</span></div>
+    <div class="item"><span class="item-name">Fried Rice</span><span class="item-dots"></span><span class="item-price">₹120 / ₹160</span></div>
+  </div>
+
+  <p class="group-label">Chowmein</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Veg. Chowmein</span><span class="item-dots"></span><span class="item-price">₹80 / ₹120</span></div>
+    <div class="item"><span class="item-name">Paneer Chowmein</span><span class="item-dots"></span><span class="item-price">₹120 / ₹160</span></div>
+    <div class="item"><span class="item-name">Hakka Chowmein</span><span class="item-dots"></span><span class="item-price">₹170</span></div>
+    <div class="item"><span class="item-name">Singapuri Chowmein <span class="spicy">Spicy</span></span><span class="item-dots"></span><span class="item-price">₹180</span></div>
+  </div>
+
+  <p class="group-label">Burgers</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Veg. Burger</span><span class="item-dots"></span><span class="item-price">₹30</span></div>
+    <div class="item"><span class="item-name">Paneer Burger</span><span class="item-dots"></span><span class="item-price">₹40</span></div>
+  </div>
+
+  <p class="group-label">More Specials</p>
+  <div class="item-grid two-col">
+    <div class="item"><span class="item-name">Choupsey</span><span class="item-dots"></span><span class="item-price">₹190</span></div>
+    <div class="item"><span class="item-name">Chilli Potato</span><span class="item-dots"></span><span class="item-price">₹100 / ₹140</span></div>
+    <div class="item"><span class="item-name">Cheese Chilli</span><span class="item-dots"></span><span class="item-price">₹180 / ₹250</span></div>
+  </div>
+
+</main>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+  <p>✦ <span>MADRAS CAFE</span> ✦</p>
+  <p style="margin-top:6px;">Om Sai Ram &nbsp;|&nbsp; No Smoking Premises</p>
+</footer>
+
+</body>
+</html>
